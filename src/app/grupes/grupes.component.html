@@ -1,0 +1,66 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header" >Studentu grupes</div>
+    <div class="card-body" >
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card mt-3" *ngFor="let grupe of grupes">
+            <div class="card-header" (click)="pridetiVisible=!pridetiVisible" style="cursor: pointer;">
+              {{ grupe.group }}, {{ grupe.location }}, {{ grupe.start_date }}
+            </div>
+            <div class="card-body" *ngIf="pridetiVisible">
+              <app-studentai
+                (dalyvaujaEmitter)="dalyvaujantys($event)"
+                (nedalyvaujaEmitter)="nedalyvaujantys($event)"
+                [students]="grupe.students"
+              >
+              </app-studentai>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" >Prideti nauja Grupe</div>
+    <div class="card-body">
+        <div class="mb-3">
+            <label for="" class="form-label">Grupe</label>
+            <input type="text" class="form-control" #groupName>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-label">Miestas</label>
+          <input type="text" class="form-control" #groupCity>
+      </div>
+      <div class="mb-3">
+        <label for="" class="form-label">Data</label>
+        <input type="text" class="form-control" #groupDate>
+    </div>
+        <button class="btn btn-success" (click)="addGroup(groupName, groupCity, groupDate)" >Prideti</button>
+    </div>
+</div>
+
+  <div class="col-md-12 mt-3">
+    <div class="card">
+      <div class="card-header">Dalyvauja {{ dalyvauja.length }}</div>
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let dalyvis of dalyvauja">
+            {{ dalyvis.name }} {{ dalyvis.surname }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">Nedalyvauja {{ nedalyvauja.length }}</div>
+      <div class="card-body">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let nedalyvis of nedalyvauja">
+            {{ nedalyvis.name }} {{ nedalyvis.surname }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
